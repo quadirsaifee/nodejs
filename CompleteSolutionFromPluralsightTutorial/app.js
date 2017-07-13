@@ -1,5 +1,25 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+//1.
+var sql = require('mssql');
+//2.
+var config = {
+    server: 'testapplicationsaqs.database.windows.net',
+    user: 'remoteuser',
+    password: 'Password1!',
+    database: 'testNodejsAppaqs',
+    options: {
+       
+        //the username above should have granted permissions in order to access this DB.
+      
+        encrypt: true
+    }
+};
+sql.connect(config, function (err) { 
+//new sql.Connection(config);///, function (err) {
+   console.log(err);
+});
  var nav=[{
                 Link: '/books',
                 Text: 'Book'
@@ -9,7 +29,8 @@ var app = express();
                 Text: 'Auther'
             }];
 var bookRoute = require('./routes/book')(nav);
-
+var adminRoute = require('./routes/Admin')(nav); 
+var authRoute = require('./routes/auth')(nav); 
 
 //var port = "1000";
 //app.set('port', port);
@@ -19,6 +40,9 @@ var bookRoute = require('./routes/book')(nav);
 
 var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+ app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set('Views', './views');
 app.get('/', function (req, res) {
     res.render('index', {
@@ -36,6 +60,8 @@ app.get('/', function (req, res) {
 });
 
 app.use('/books', bookRoute);
+app.use('/Admin', adminRoute);  
+app.use('/auth', authRoute);  
 //app.get('/books', function (req, res) {
 
 //    res.send('hello books');

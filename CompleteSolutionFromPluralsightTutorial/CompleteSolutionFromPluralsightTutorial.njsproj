@@ -32,6 +32,8 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="gulpfile.js" />
+    <Compile Include="routes\Admin.js" />
+    <Compile Include="routes\auth.js" />
     <Compile Include="routes\book.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
