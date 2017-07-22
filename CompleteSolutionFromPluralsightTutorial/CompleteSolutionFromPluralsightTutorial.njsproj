@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="config\passport.js" />
     <Compile Include="gulpfile.js" />
     <Compile Include="routes\Admin.js" />
     <Compile Include="routes\auth.js" />
@@ -44,6 +45,7 @@
     <Content Include="package.json" />
     <Content Include="public\css\styles.css" />
     <Content Include="README.md" />
+    <Content Include="stratagies\local.stratagy.js" />
     <Content Include="views\bookdetails.ejs" />
     <Content Include="views\books.ejs" />
     <Content Include="views\Index11.ejs" />
@@ -54,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="config\" />
+    <Folder Include="stratagies\" />
     <Folder Include="public\" />
     <Folder Include="public\css\" />
     <Folder Include="public\js\" />

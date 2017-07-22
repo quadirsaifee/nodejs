@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
+var session = require('express-session');
 //1.
 var sql = require('mssql');
 //2.
@@ -42,7 +45,14 @@ var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
  app.use(bodyParser.urlencoded({ extended: true }));
+ app.use(cookieParser());
+ app.use(session({
+     secret: 'library', resave: true,
+     saveUninitialized: true}));
+ app.use(passport.initialize());
+ app.use(passport.session());
 
+ require('./config/passport')(app);
 app.set('Views', './views');
 app.get('/', function (req, res) {
     res.render('index', {
